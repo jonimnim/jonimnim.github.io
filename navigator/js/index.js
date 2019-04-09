@@ -1,5 +1,9 @@
 window.onload = function(){
   var center = [30.352971500000002, 59.93466050000001];
+  var view = new ol.View({
+    center: ol.proj.fromLonLat(center),
+    zoom: 10
+  });
   var map = new ol.Map({
     target: 'map',
     layers: [
@@ -10,10 +14,7 @@ window.onload = function(){
           })
       })
     ],
-    view: new ol.View({
-      center: ol.proj.fromLonLat(center),
-      zoom: 10
-    })
+    view
   });
 
   var source = new ol.source.Vector({});
@@ -38,7 +39,9 @@ window.onload = function(){
 
 
   function updateCoordinate(position){
-    feature.getGeometry().setCoordinates(ol.proj.fromLonLat([position.coords.longitude, position.coords.latitude]));
+    var c = ol.proj.fromLonLat([position.coords.longitude, position.coords.latitude]);
+    feature.getGeometry().setCoordinates(c);
+    view.setCenter(c)
   }
 
   var geo_options = {
