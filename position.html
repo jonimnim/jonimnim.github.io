@@ -3,27 +3,56 @@
 <head>
 	<meta charset="UTF-8">
 	<title>My position</title>
+	<style>
+		button.active {
+			background-color: #FFEB3B;
+		}
+	</style>
 </head>
 <body>
 	 <script>
-		var x = null;
+		var outCoordinate = null;
+		var outWatch = null;
 		window.onload = function() {
-			x = document.getElementById("demo");
+			outCoordinate = document.getElementById("outCoordinate");
+			outWatch = document.getElementById("outWatch");
 		}
 		function getLocation() {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(showPosition);
 			} else {
-				x.innerHTML = "Geolocation is not supported by this browser.";
+				outCoordinate.innerHTML = "Geolocation is not supported by this browser.";
 			}
 		}
 
 		function showPosition(position) {
-			x.innerHTML = "Latitude: " + position.coords.latitude +
-			"<br>Longitude: " + position.coords.longitude;
+			outCoordinate.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+		}
+
+
+		var isWatchMe = false;
+		var watchId = null;
+		function toggleWatchMe(e){
+			isWatchMe = !isWatchMe;
+			if(isWatchMe) {
+				watchId = navigator.geolocation.watchPosition(watchCallback);
+				e.className = "active";
+				e.innerText = "Выключить слежение";
+			} else {
+				navigator.geolocation.clearWatch(watchId);
+				e.innerText = "Включить слежение";
+				e.className = "";
+			}
+		}
+
+		function watchCallback(position){
+			outWatch.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
 		}
 	</script>
 	<button onclick="getLocation();">Получить координаты</button>
-	<div id="demo"></div>
+	<div id="outCoordinate"></div>
+
+	<button onclick="toggleWatchMe(this);">Включить слежение</button>
+	<div id="outWatch"></div>
 </body>
 </html>
