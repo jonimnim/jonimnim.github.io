@@ -35,7 +35,12 @@
 		function toggleWatchMe(e){
 			isWatchMe = !isWatchMe;
 			if(isWatchMe) {
-				watchId = navigator.geolocation.watchPosition(watchCallback);
+				var geo_options = {
+					enableHighAccuracy: true, 
+					maximumAge        : 30000, 
+					timeout           : 27000
+				};
+				watchId = navigator.geolocation.watchPosition(watchCallback, null, geo_options);
 				e.className = "active";
 				e.innerText = "Выключить слежение";
 			} else {
