@@ -41,7 +41,7 @@ window.onload = function(){
   function updateCoordinate(position){
     var c = ol.proj.fromLonLat([position.coords.longitude, position.coords.latitude]);
     feature.getGeometry().setCoordinates(c);
-    view.setCenter(c)
+    view.setCenter(c);
   }
 
   var geo_options = {
