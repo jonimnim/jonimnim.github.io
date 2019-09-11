@@ -8,10 +8,7 @@ window.onload = function(){
     target: 'map',
     layers: [
       new ol.layer.Tile({
-          source: new ol.source.XYZ({
-              url: 'http://mapsserver.regatav6.ru/rest/our/{z}/{x}/{y}',
-              crossOrigin: 'Anonymous'
-          })
+        source: new ol.source.OSM()
       })
     ],
     view
