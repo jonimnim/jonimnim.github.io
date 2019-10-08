@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>WebSocketApp</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" name="" v-model:value="message" /> <button v-on:click="sendMessage">send</button>
+		<div v-for="m in messages">{{ m }}</div>
+	</div>
+</body>
+</html>
